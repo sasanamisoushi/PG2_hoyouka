@@ -17,9 +17,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 	Player *player = new Player();
-	Enemy *enemy = new Enemy(player, { float(rand() % 400), 0.0f },2.0f);
+	Enemy *enemy = new Enemy(player, { float(rand() % 400), 0.0f }, 2.0f);
 
-	Enemy *enemyA = new Enemy(player,{float(rand()%480-200),0.0f},3.0f);
+	Enemy *enemyA = new Enemy(player,{float(rand()%480-200),0.0f}, 3.0f);
 
 	//プレイヤーの体力
 	int playerHp = 3;
@@ -36,7 +36,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
 		Novice::BeginFrame();
-
 		// キー入力を受け取る
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
@@ -54,12 +53,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				score = 0;
 			}
 
+
+			Novice::ScreenPrintf(200, 300, "TITLE");
+			Novice::ScreenPrintf(180, 320, "PUSU TO ENTER");
+
 			break;
 
 		case GAME:
 			gameTimer++;
 
-			player->Update(keys,playerHp);
+			player->Update(keys,playerHp,score);
 			enemy->Update(gameTimer,playerHp, score,{ float(rand() % 400), 0.0f });
 
 
@@ -69,7 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				scene = GAMEOVER;
 			}
 
-			if (gameTimer >= 1000) {
+			if (gameTimer >= 2000) {
 				scene = CLEAR;
 				
 			}
@@ -99,6 +102,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 			Novice::ScreenPrintf(200, 300, "score=%d", score);
+			Novice::ScreenPrintf(180, 320, "PUSU TO ENTER");
 			break;
 		case GAMEOVER:
 			if (keys[DIK_RETURN] && !preKeys[DIK_RETURN]) {
@@ -108,7 +112,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				delete player;
 			}
 
-			Novice::ScreenPrintf(100, 300, "score=%d", score);
+			Novice::ScreenPrintf(200, 300, "score=%d", score);
+			Novice::ScreenPrintf(180, 320, "PUSU TO ENTER");
 			break;
 		}
 
