@@ -9,14 +9,14 @@ Player::Player() {
 	speed_ = 5.0f;
 	isAlive_ = true;
 	bullet_ = new Bullet;
-	
+	additionHp_ = false;
 }
 
 Player::~Player() {
 	delete bullet_;
 }
 
-void Player::Update(char *keys,int &playerHp) {
+void Player::Update(char *keys,int &playerHp,int score) {
 	if (keys[DIK_A]) {
 		if (pos_.x > 0.0f) {
 			pos_.x -= speed_;
@@ -37,8 +37,6 @@ void Player::Update(char *keys,int &playerHp) {
 				bullet_->pos_[i].y = pos_.y + radius_ / 2.0f;
 			}
 		}
-		
-
 	}
 
 	if (playerHp == 0) {
@@ -46,6 +44,16 @@ void Player::Update(char *keys,int &playerHp) {
 	}
 
 	bullet_->Update();
+
+	if (score == 1000||score==2000||score==3000) {
+		if (!additionHp_) {
+			playerHp += 1;
+			additionHp_ = true;
+		} 
+	} else {
+		additionHp_ = false;
+	}
+
 }
 
 void Player::Draw() {
