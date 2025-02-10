@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Enemy.h"
 
-const char kWindowTitle[] = "LC1C_07_sasnami_sousi";
+const char kWindowTitle[] = "LC1C_07_ササナミ_ソウシ_評価課題";
 
 
 
@@ -87,7 +87,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			enemyA->Draw();
 
 			Novice::ScreenPrintf(10, 20, "playerHP=%d", playerHp);
-			Novice::ScreenPrintf(10, 40, "Timer=%d", gameTimer);
+			Novice::ScreenPrintf(10, 40, "Timer=%d", gameTimer/60);
 			Novice::ScreenPrintf(10, 60, "score=%d", score);
 
 			break;
